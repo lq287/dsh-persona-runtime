@@ -16,7 +16,7 @@
       name: dsh-persona-runtime
       config:
         projectRoot: '/path/to/your/shell'      # ← 必须改（含 persona/ 子包）
-        actor: ''                               # 例如 qq:2872422308；留空=匿名（陌生人档）
+        actor: ''                               # 例如 qq:10001 / wx:your_wxid；留空=匿名（陌生人档）
         userId: default
         backend: auto                           # auto | postgres | memory
         tools: true

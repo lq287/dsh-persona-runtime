@@ -19,7 +19,9 @@ import { PersonaSidecar } from "../lib/sidecar.js";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 // test/ → dsh-plugin/ → persona/ → shell（含 persona/ 子包的那一级）
 const ROOT = process.env.PERSONA_ROOT || path.resolve(HERE, "..", "..", "..");
-const OWNER = process.env.PERSONA_OWNER || "qq:2872422308";
+// owner 身份默认取 state/owners.json 的第一条（仓库里不写真实账号）；
+// 想指定就用 PERSONA_OWNER=qq:xxxx 覆盖。
+let OWNER = process.env.PERSONA_OWNER || null;
 
 let failed = 0;
 function check(name, cond, detail) {
@@ -44,6 +46,9 @@ try {
   check("status 有人格名", Boolean(status.name), status.name);
   check("status 有 owner 白名单", (status.owners || []).length > 0, `${status.owners.length} 个`);
   check("status 边界条数 > 0", status.boundaries > 0, `${status.boundaries} 条`);
+
+  OWNER = OWNER || (status.owners || [])[0];
+  if (!OWNER) throw new Error("state/owners.json 里没有 owner，无法验证 owner 档");
 
   const asOwner = await sidecar.request("assemble", { actor: OWNER, user_input: "今天有点累" });
   check("owner 装配 → closest", asOwner.relationship.tier === "closest", asOwner.relationship.tier);

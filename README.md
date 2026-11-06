@@ -39,7 +39,7 @@ dsh plugin --profile <profile> add "file:D:\DSH proj\shell\persona\dsh-plugin"
 - id: persona
   config:
     projectRoot: 'D:\DSH proj\shell'
-    actor: 'qq:2872422308'      # 你本人；留空=匿名（陌生人档）
+    actor: 'qq:10001'           # 你本人（要和 state/owners.json 里的一致）；留空=匿名
     backend: auto
     inject: true
     injectBudget: 3000
