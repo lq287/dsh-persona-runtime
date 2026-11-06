@@ -1,0 +1,44 @@
+{
+  "name": "dsh-persona-runtime",
+  "version": "0.1.0",
+  "description": "Living persona layers for DeepSeek Harness: per-turn relationship tier + evolvable preferences (two DB-backed gates) + scenario style + boundary examples, on top of the static core that dsh-system-prompt's persona slot owns. Never touches deployment:persona.",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "persona",
+    "relationship",
+    "preferences",
+    "drift"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/sidecar.js",
+    "cordis.patch.yml",
+    "README.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "smoke": "node test/smoke.mjs"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-tools": "^0.1.1-rc.2",
+    "@deepseek-ai/schemastery": "^3.18.1"
+  }
+}
